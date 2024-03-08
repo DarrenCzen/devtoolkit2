@@ -1,17 +1,20 @@
 const express = require("express");
-const database = require("./mock_data");
+const user = require("../backend/api/users");
 
 let app = express();
 
 app.use(express.json());
+app.use("/users", user.router);
 
 router = express.Router();
 
-router.get("/people", (request, response) => {
-  console.log(request.query.id);
-  response.send(database.get_all_users());
+router.get("/", (request, response) => {
+  response.send("Hello World");
 });
 
 app.use(router);
 
-app.listen(3000);
+app.listen(3000, (errors) => {
+  if (errors) console.error("not working");
+  else console.log("Listening on Port 3000");
+});
