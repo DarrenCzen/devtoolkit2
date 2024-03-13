@@ -1,10 +1,8 @@
-// Step 1: define our paramenters
-// we need to use the mysql module
+// Step 1: Define Parameters
 const mysql = require("mysql");
-// hiding connection parameters in the .env file
-// so we need the dotenv module
-require("dotenv").config();
-// bring our connection parameters from .env
+
+require("dotenv").config({ path: "../config/.env" });
+
 parameters = {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
@@ -13,8 +11,6 @@ parameters = {
   database: process.env.DB_NAME,
   multipleStatements: true,
 };
-
-console.log(parameters);
 
 // Step 2: establish a connection to the database
 // now we use the methods available from the mysql module
@@ -26,15 +22,8 @@ mysqlConnection.connect((error) => {
   if (error) {
     console.log(error);
   } else {
-    // if successful, write a message to the console
-    console.log("Connected to MySQL");
+    console.log("Connected to MySQL"); //Successful Connection
   }
 });
 
-mysqlConnection.query(`SELECT * from customer`, (err, results) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(results);
-  }
-});
+module.exports = { connection };
